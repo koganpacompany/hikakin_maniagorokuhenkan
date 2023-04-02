@@ -27,6 +27,21 @@
                     document.form1.text.value = text;
     }
     //-->
+    document.addEventListener('DOMContentLoaded', function() {
+    function copyClipboard(event) {
+        const clipboard = document.createElement('textarea');
+        clipboard.value = event.target.previousElementSibling.value;
+        event.target.appendChild(clipboard);
+        clipboard.select();
+        document.execCommand('copy');
+        event.target.removeChild(clipboard);
+    }
+
+    const buttons = document.getElementsByClassName('copy_clipboard');
+    for(let i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', copyClipboard);
+    }
+});
     </script>
 </head>
 <body>
@@ -38,6 +53,8 @@
     <textarea name="text" rows="20" cols="70"></textarea><br>
     <br>
     <input type="button" onClick="hikamani()" value="変換">
+    </br>
+    <button class="copy_clipboard">コピー</button>
 </form>
 </center>
 </body>
